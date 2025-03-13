@@ -7,10 +7,11 @@ const Input = ({
   inputRef,
   name,
   type,
-  onChange,
+  onChange = () => {},
   error,
   description,
   maxLength,
+  placeholder,
   id,
 }) => {
   const [isFilled, setIsFilled] = useState(false);
@@ -27,6 +28,11 @@ const Input = ({
 
   const handleFocus = () => setFocus(true);
   const handleBlur = () => setFocus(false);
+  const handleChange = (e) => {
+    onChange(e.target.value);
+    setIsFilled(!!e.target.value);
+  };
+
 
   return (
     <div className="relative w-full max-w-[300px]">
@@ -37,26 +43,22 @@ const Input = ({
           name={name}
           id={name}
           ref={inputRef}
-          placeholder=" "
+          placeholder={placeholder}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onChange={(e) => {
-            onChange(e.target.value);
-            setIsFilled(!!e.target.value);
-          }}
+          onChange={handleChange}
           maxLength={maxLength}
           className={`w-full bg-transparent p-2 pt-4 text-sm text-black outline-none
             ${error ? "border-red-500" : ""}
           `}
         />
-        {label && (
-          <span
-            className={`absolute left-3 text-lg font-medium text-gray-500 transition-all ${
-              focus || isFilled ? "top-2 scale-75 text-green-600" : "top-6"
-            }`}
-          >
-            {label}
-          </span>
+        {label && 
+ label && !(focus || isFilled) && (
+  <span
+    className="absolute left-1/2 top-3 -translate-x-1/2 text-base font-medium text-gray-500 transition-all duration-150 ease-in-out"
+  >
+    {label}
+  </span>
         )}
         {isFilled && (
           <span

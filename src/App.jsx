@@ -10,11 +10,11 @@ import './App.css'
 
 function App() {
   const [users, setUsers] = useState([]);
-  const { currentUser } = useAuth();  // Add this line
+  const { currentUser } = useAuth(); 
   const usersCollectionRef = collection(firestore, 'users');
 
   useEffect(() => {
-    if (!currentUser) return;  // Only fetch if user is authenticated
+    if (!currentUser) return; 
     
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -24,10 +24,6 @@ function App() {
     getUsers();
     
   }, [currentUser]);
-
-  // useEffect(() => {
-  //   console.log("Updated users state:", users);
-  // }, [users]);
 
 
   return (
