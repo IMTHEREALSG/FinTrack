@@ -26,6 +26,13 @@ const Login = () => {
     }
     setLoading(false);
   }
+  const handleEmailChange = (value) => {
+    emailRef.current.value = value;
+  };
+
+  const handlePasswordChange = (value) => {
+    passwordRef.current.value = value;
+  };
 
   const handleGoogleSignIn = async () => {
     try {
@@ -69,16 +76,18 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="space-y-5 flex flex-col items-center">
           <Input
             type="email"
-            placeholder="Email"
+            label="Email"
             inputRef={emailRef}
+            onChange={handleEmailChange}
             id="email"
             name="email"
             required
           />
           <Input
             type="password"
-            placeholder="Password"
+            label="Password"
             inputRef={passwordRef}
+            onChange={handlePasswordChange}
             id="password"
             name="password"
             required

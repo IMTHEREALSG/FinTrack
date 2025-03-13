@@ -7,7 +7,7 @@ const Input = ({
   inputRef,
   name,
   type,
-  onChange = () => {},
+  onChange,
   error,
   description,
   maxLength,
@@ -43,7 +43,7 @@ const Input = ({
           name={name}
           id={name}
           ref={inputRef}
-          placeholder={placeholder}
+          placeholder="&nbsp;"
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -52,14 +52,15 @@ const Input = ({
             ${error ? "border-red-500" : ""}
           `}
         />
-        {label && 
- label && !(focus || isFilled) && (
+        {label && (
   <span
-    className="absolute left-1/2 top-3 -translate-x-1/2 text-base font-medium text-gray-500 transition-all duration-150 ease-in-out"
+    className={`absolute left-3 text-base font-medium text-gray-500 transition-all duration-150 ease-in-out
+      ${focus || isFilled ? "top-1 text-xs text-green-600" : "top-3"}
+    `}
   >
     {label}
   </span>
-        )}
+)}
         {isFilled && (
           <span
             className="absolute right-3 top-3 cursor-pointer"

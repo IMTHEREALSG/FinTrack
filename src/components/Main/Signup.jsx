@@ -7,6 +7,7 @@ import Button from "../form/button";
 const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const nameRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup, googleSignIn } = useAuth();
   const [error, setError] = useState("");
@@ -32,6 +33,22 @@ const Signup = () => {
     }
     setLoading(false);
   }
+
+  const handleEmailChange = (value) => {
+    emailRef.current.value = value;
+  };
+
+  const handlePasswordChange = (value) => {
+    passwordRef.current.value = value;
+  };
+
+  const handlePasswordConfirmChange = (value) => {
+    passwordConfirmRef.current.value = value;
+  };
+
+  const handleNameChange = (value) => {
+    nameRef.current.value = value;
+  };
 
   const handleGoogleSignIn = async () => {
     try {
@@ -73,26 +90,38 @@ const Signup = () => {
 
           {/* Signup Form */}
           <form onSubmit={handleSubmit} className="space-y-5 flex flex-col items-center">
+          <Input
+          label="Name"
+          type="text"
+          inputRef={nameRef}
+          name="name"
+          required
+          onChange={handleNameChange}
+          id="name"
+        />
             <Input
               type="email"
-              placeholder="Email"
+              label="Email"
               inputRef={emailRef}
+              onChange={handleEmailChange}
               id="email"
               name="email"
               required
             />
             <Input
               type="password"
-              placeholder="Password"
+              label="Password"
               inputRef={passwordRef}
+              onChange={handlePasswordChange}
               id="password"
               name="password"
               required
             />
             <Input
               type="password"
-              placeholder="Confirm Password"
+              label="Confirm Password"
               inputRef={passwordConfirmRef}
+              onChange={handlePasswordConfirmChange}
               id="password-confirm"
               name="password-confirm"
               required
